@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiabetesAI - Prediction Result</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background:
+            linear-gradient(135deg,#050816,#091540,#050816);
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
+        }
+
+        .container{
+            width:900px;
+            max-width:95%;
+        }
+
+        .card{
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.1);
+            backdrop-filter:blur(15px);
+            border-radius:25px;
+            padding:40px;
+            box-shadow:
+            0 0 30px rgba(0,255,255,0.15);
+            animation:fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(30px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        .title{
+            text-align:center;
+            font-size:42px;
+            font-weight:700;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#aaa;
+            margin-bottom:40px;
+        }
+
+        .risk-box{
+            text-align:center;
+            margin-bottom:35px;
+        }
+
+        .percentage{
+            font-size:80px;
+            font-weight:bold;
+            color:#00d9ff;
+            text-shadow:0 0 20px #00d9ff;
+        }
+
+        .status{
+            display:inline-block;
+            margin-top:20px;
+            padding:12px 30px;
+            border-radius:50px;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .diabetic{
+            background:#ff1744;
+            box-shadow:0 0 20px #ff1744;
+        }
+
+        .nondiabetic{
+            background:#00c853;
+            box-shadow:0 0 20px #00c853;
+        }
+
+        .grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:25px;
+            margin-top:30px;
+        }
+
+        .info-card{
+            background:rgba(255,255,255,0.05);
+            padding:25px;
+            border-radius:18px;
+            border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .info-card h3{
+            margin-bottom:15px;
+            color:#00d9ff;
+        }
+
+        ul{
+            padding-left:20px;
+        }
+
+        li{
+            margin-bottom:10px;
+        }
+
+        .btn{
+            display:block;
+            width:220px;
+            text-align:center;
+            margin:40px auto 0;
+            padding:15px;
+            text-decoration:none;
+            border-radius:12px;
+            color:white;
+            background:linear-gradient(
+            45deg,
+            #00d9ff,
+            #6a00ff
+            );
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            transform:scale(1.05);
+        }
+
+        .prediction-text{
+            font-size:28px;
+            text-align:center;
+            margin-top:15px;
+            font-weight:bold;
+        }
+
+        .footer{
+            text-align:center;
+            margin-top:30px;
+            color:#888;
+            font-size:14px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="title">
+                DiabetesAI Result
+            </div>
+
+            <div class="subtitle">
+                AI Powered Diabetes Risk Analysis
+            </div>
+
+            <div class="risk-box">
+
+                <div class="percentage">
+                    {{ probability }}%
+                </div>
+
+                <div class="prediction-text">
+                    Prediction: {{ result }}
+                </div>
+
+                {% if result == "Diabetic" %}
+                <div class="status diabetic">
+                    🔴 HIGH RISK
+                </div>
+                {% else %}
+                <div class="status nondiabetic">
+                    🟢 LOW RISK
+                </div>
+                {% endif %}
+
+            </div>
+
+            <div class="grid">
+
+                <div class="info-card">
+                    <h3>📊 Analysis Summary</h3>
+
+                    <p>
+                        Based on the patient biomarkers,
+                        the AI model has completed
+                        diabetes risk evaluation.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Estimated Risk:
+                        <b>{{ probability }}%</b>
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>💡 Recommendations</h3>
+
+                    <ul>
+                        <li>Maintain healthy diet</li>
+                        <li>Exercise regularly</li>
+                        <li>Monitor blood sugar levels</li>
+                        <li>Stay hydrated</li>
+                        <li>Consult physician if needed</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <a href="/" class="btn">
+                🔙 New Prediction
+            </a>
+
+            <div class="footer">
+                DiabetesAI • Machine Learning Based Clinical Decision Support System
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
